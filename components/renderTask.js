@@ -1,13 +1,16 @@
-import { Task } from "./createTask.js";
+import { deleteRepeatedDates, sortDate } from "../services/date.js";
+import { createDate } from "./createDate.js";
 
 export const renderTask = () => {
     const list = document.querySelector("[data-list]");
 
-    const registeredTasks = JSON.parse(localStorage.getItem("tasks") || []);
+    const registeredTasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-    list.innerText = "";
+    list.innerHTML = "";
+    const singleDates = deleteRepeatedDates(registeredTasks);
+    sortDate(singleDates);
 
-    registeredTasks.forEach(task => {
-        list.appendChild(Task(task));
+    singleDates.forEach(day => {
+        list.appendChild(createDate(day));
     });
 }
