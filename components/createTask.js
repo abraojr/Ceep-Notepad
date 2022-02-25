@@ -1,12 +1,12 @@
 import FinishButton from "./finishTask.js";
 import DeleteButton from "./deleteTask.js"
+import { renderTask } from "./renderTask.js";
 
 export const handleNewItem = (event) => {
 
     event.preventDefault();
 
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    const list = document.querySelector("[data-list]");
     const input = document.querySelector("[data-form-input]");
     const value = input.value;
 
@@ -21,12 +21,11 @@ export const handleNewItem = (event) => {
 
     const updatedTasks = [...tasks, data]
 
-    const task = Task(data);
-
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
 
-    list.appendChild(task);
     input.value = "";
+
+    renderTask();
 
 }
 
