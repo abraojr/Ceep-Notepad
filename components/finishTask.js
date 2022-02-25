@@ -1,20 +1,22 @@
-const FinishButton = () => {
+const finishTask = (update, id) => {
+    const registeredTasks = JSON.parse(localStorage.getItem("tasks"));
+
+    registeredTasks[id].finished = !registeredTasks[id].finished;
+
+    localStorage.setItem("tasks", JSON.stringify(registeredTasks));
+
+    update();
+}
+
+const FinishButton = (update, id) => {
     const finishButton = document.createElement("button");
 
     finishButton.classList.add("check-button");
     finishButton.innerText = "finish";
 
-    finishButton.addEventListener("click", finishTask);
+    finishButton.addEventListener("click", () => finishTask(update, id));
 
     return finishButton;
-}
-
-const finishTask = (event) => {
-    const finishButton = event.target;
-
-    const completedTask = finishButton.parentElement;
-
-    completedTask.classList.toggle("done");
 }
 
 export default FinishButton;

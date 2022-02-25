@@ -9,14 +9,17 @@ export const handleNewItem = (event) => {
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     const input = document.querySelector("[data-form-input]");
     const value = input.value;
-
     const calendar = document.querySelector("[data-form-date]");
     const date = moment(calendar.value);
+    const time = date.format("HH:mm");
     const formatedDate = date.format('DD/MM/YYYY');
+    const finished = false;
 
     const data = {
         value,
-        formatedDate
+        formatedDate,
+        time,
+        finished
     }
 
     const updatedTasks = [...tasks, data]
@@ -29,17 +32,18 @@ export const handleNewItem = (event) => {
 
 }
 
-export const Task = ({ value, formatedDate }) => {
+export const Task = ({ value, time, finished }, id) => {
 
     const task = document.createElement("li");
-    task.classList.add("task");
-    const content = `<p class="content">${formatedDate} * ${value}</p>`;
+    const content = `<p class="content">${time} * ${value}</p>`;
 
+    if (finished) task.classList.add("done");
+
+    task.classList.add("task");
     task.innerHTML = content;
 
-    task.appendChild(FinishButton());
-    task.appendChild(DeleteButton());;
+    task.appendChild(FinishButton(renderTask, id));
+    task.appendChild(DeleteButton(renderTask, id));
 
     return task;
-
 }
