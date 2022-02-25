@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 
 <head>
     <meta charset="UTF-8">
@@ -20,6 +20,7 @@
 
             <form class="form" action="">
                 <input class="form-input" type="text" data-form-input>
+                <input type="datetime-local" data-form-date placeholder="date must be in the format dd/mm/yyyy">
                 <button class="form-button" data-form-button> New Item </button>
             </form>
 
@@ -27,6 +28,8 @@
 
             </ul>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+            referrerpolicy="no-referrer"></script>
         <script type="module" src="main.js"></script>
 </body>
 
